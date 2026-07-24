@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0b1f4d;
+  --color-navy-900: #07132f;
+  --color-navy-800: #0e2a63;
+  --color-navy-700: #163a7e;
+  --color-navy-200: #c7d3ea;
+  --color-navy-100: #e3eaf6;
+  --color-navy-50: #f2f5fb;
+  --color-flag-red: #d6262c;
+  --color-flag-red-700: #a51822;
+  --color-flag-red-50: #fdecec;
+  --color-paper: #f6f7fb;
+  --color-ink: #16203c;
+
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 94px;
+}
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection {
+  background: var(--color-flag-red);
+  color: #fff;
+}
+:focus-visible {
+  outline: 2px solid var(--color-flag-red);
+  outline-offset: 2px;
+}
+
+/* Faint blueprint grid for light surfaces */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(11, 31, 77, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 31, 77, 0.05) 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+/* Faint blueprint grid for dark surfaces */
+.bg-grid-dark {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.75s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 34s linear infinite;
+}
+.marquee:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Pulsing map pin */
+@keyframes ping2 {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  75%,
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+.ping-ring {
+  animation: ping2 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Gentle float for accent cards */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-floaty {
+  animation: floaty 7s ease-in-out infinite;
+}
+
+/* Button system */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  padding: 0.9rem 1.55rem;
+  border-radius: 4px;
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-red {
+  background: var(--color-flag-red);
+  color: #fff;
+  box-shadow: 0 12px 26px -14px rgba(214, 38, 44, 0.8);
+}
+.btn-red:hover {
+  background: var(--color-flag-red-700);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 32px -14px rgba(214, 38, 44, 0.85);
+}
+.btn-ghost {
+  border: 1.5px solid rgba(11, 31, 77, 0.28);
+  color: var(--color-navy);
+  background: transparent;
+}
+.btn-ghost:hover {
+  background: var(--color-navy);
+  color: #fff;
+  border-color: var(--color-navy);
+  transform: translateY(-2px);
+}
+.btn-white {
+  background: #fff;
+  color: var(--color-navy);
+  box-shadow: 0 12px 26px -16px rgba(0, 0, 0, 0.55);
+}
+.btn-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 32px -16px rgba(0, 0, 0, 0.6);
+}
+.btn-dark-ghost {
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  color: #fff;
+  background: transparent;
+}
+.btn-dark-ghost:hover {
+  background: #fff;
+  color: var(--color-navy);
+  transform: translateY(-2px);
+}
+
+/* Animated underline for nav links */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 2px;
+  width: 0;
+  background: var(--color-flag-red);
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none;
+  }
+  .animate-marquee,
+  .animate-floaty,
+  .ping-ring {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
