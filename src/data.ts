@@ -135,9 +135,8 @@ export const stats = [
 
 export const serviceOptions = services.map((s) => s.title).concat(["General Inquiry / Other"]);
 
-export const heroImage ="img1.png";
-export const aboutImage =
-  "img2.png";
+export const heroImage = "/img1.png";
+export const aboutImage = "/img2.png";
 export const aboutImage2 =
   "https://images.pexels.com/photos/8961400/pexels-photo-8961400.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=700&h=900";
 
